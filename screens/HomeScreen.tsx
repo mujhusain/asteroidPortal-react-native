@@ -1,25 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, TextInput, Button, Alert} from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import {getDetails, getList} from '../api/api';
 import Loader from '../components/Loader';
 import LogoImage from '../components/LogoImage';
 import {Colors} from '../constants/Colors';
 
-function HomeScreen({navigation}) {
+
+function HomeScreen({navigation}: any) {
   const isFocused = useIsFocused();
 
   const [asteroidId, setAsteroidId] = useState('');
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  function handleInputChange(text) {
+  function handleInputChange(text: string) {
     setAsteroidId(text.trim());
   }
 
   useEffect(() => {
     setAsteroidId('');
     setLoading(false);
-  }, [navigation,isFocused]);
+  }, [navigation, isFocused]);
 
   function handleSearch() {
     setLoading(true);
@@ -34,7 +35,7 @@ function HomeScreen({navigation}) {
     getAsteroidData(asteroidId);
   }
 
-  async function getAsteroidData(asteroidId) {
+  async function getAsteroidData(asteroidId: string) {
     try {
       const {data} = await getDetails(asteroidId);
       navigation.navigate('Asteroid Details', {details: data});
@@ -52,7 +53,7 @@ function HomeScreen({navigation}) {
       try {
         let temp;
         const {data} = await getList();
-        let arr = data?.near_earth_objects?.map(item => item.id);
+        let arr = data?.near_earth_objects?.map((item: {id: number}) => item.id);
         temp = arr[Math.floor(Math.random() * arr?.length)];
 
         getAsteroidData(temp);
@@ -68,13 +69,13 @@ function HomeScreen({navigation}) {
     setAsteroidId('');
   }
 
-  if(loading){
-    return <Loader />
+  if (loading) {
+    return <Loader />;
   }
 
   return (
     <View style={styles.homeScreen}>
-      <LogoImage />
+      {/* <LogoImage /> */}
       <Text style={styles.title}>ASTEROID PORTAL</Text>
       <View style={styles.inputContainer}>
         <TextInput
