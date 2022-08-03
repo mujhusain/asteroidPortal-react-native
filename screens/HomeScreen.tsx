@@ -75,7 +75,7 @@ function HomeScreen({navigation}: any) {
 
   return (
     <View style={styles.homeScreen}>
-      {/* <LogoImage /> */}
+      <LogoImage />
       <Text style={styles.title}>ASTEROID PORTAL</Text>
       <View style={styles.inputContainer}>
         <TextInput

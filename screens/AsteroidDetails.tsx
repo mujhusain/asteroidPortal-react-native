@@ -3,12 +3,9 @@ import {Text, View, StyleSheet, Button} from 'react-native';
 import AsteroidImage from '../components/AsteroidImage';
 import {Colors} from '../constants/Colors';
 
-import {NavigationProp, RouteProp} from '@react-navigation/native';
-
-
 type navigationType = {
-  route:any,
-  navigation: any,
+  route: any;
+  navigation: any;
 };
 
 type detailsType = {
@@ -20,14 +17,16 @@ type detailsType = {
   absolute_magnitude_h: number;
 };
 
+
 function AsteroidDetails({route, navigation}: navigationType) {
-  const data = route.params.details as detailsType;
+  const data = route?.params?.details as detailsType;
 
   useLayoutEffect(() => {
-    navigation.setOptions({
-      title: `Asteroid Id: ${data.id}`,
+    navigation?.setOptions({
+      title: `Asteroid Id: ${data?.id}`,
       headerRight: () => (
         <Button
+        testID="homeButton"
           title="Home"
           color="tomato"
           onPress={() => navigation.navigate('Home')}
@@ -37,7 +36,7 @@ function AsteroidDetails({route, navigation}: navigationType) {
   }, [navigation]);
   return (
     <>
-      {/* <AsteroidImage /> */}
+      <AsteroidImage />
       <View style={styles.detailsContainer}>
         <Text style={styles.text}>Name: {data?.name} </Text>
         <Text style={styles.text}>Name Limited: {data?.name_limited}</Text>
